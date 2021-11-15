@@ -1,0 +1,14 @@
+*~
+.Trashes
+*.swp
+*.log
+!.gitignore
+*.conf
+*.cfg
+*.config
+*.pyc
+*.tox
+venv/*                                                                                                                                                                                         
+venv/                                                                                                                                                                                          
+**/venv                                                                                                                                                                                        
+__pycache__

@@ -1,0 +1,8 @@
+beautifulsoup4
+requests
+pandas
+configparser
+argparse
+beautifultable
+termcolor
+urllib3

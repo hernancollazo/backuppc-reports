@@ -1,0 +1,33 @@
+
+[general]
+# Alert when the last full backup has more than X days
+max_full_backup_age = 7
+# Alert when the last incremental backup has more than X days
+max_incr_backup_age = 1
+# Alert when the last backup has more than X days
+last_backup_age = 2
+
+[backuppc]
+# The current BackupPc Server URL to the summary page
+# Example: http://backuppc-server/backuppc?action=summary
+url = http://backuppc-server/backuppc?action=summary
+# Your login for the BackupPc GUI
+username = backuppc
+# Your password for the BackupPc GUI
+password = password
+
+[notifications]
+# Your SMTP server hostname/ip
+smtp_server = localhost
+# Your SMTP port
+smtp_port = 25
+# Your SMTP auth username (leave NULL if you don't have to use)
+smtp_user = NULL
+# Your SMTP auth password (leave NULL if you don't have to use)
+smtp_pass = NULL
+# Use TLS? (1 for Yes, 0 for no)
+smtp_tls = 0
+# The email address from which the alert will be sent
+email_from = backuppc@domain.com
+# The recipient of the alert
+email_to = backups-adm@domain.com
