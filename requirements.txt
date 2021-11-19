@@ -6,3 +6,4 @@ argparse
 beautifultable
 termcolor
 urllib3
+lxml
