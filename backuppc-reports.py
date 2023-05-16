@@ -49,9 +49,18 @@ Freely distributed under the MIT license.
 
 def get_backup_data():
     """ Get all data from BackupPc GUI and return this as a dictionary """
-    page = requests.get(backuppc_url, 
-                auth=HTTPBasicAuth(backuppc_username, backuppc_password),
-                verify=False)
+    try:
+        page = requests.get(backuppc_url, 
+                    auth=HTTPBasicAuth(backuppc_username, backuppc_password),
+                    verify=False, timeout=30)
+    except requests.exceptions.Timeout:
+        sendEmail('BackupPc Monitor - Timeout connecting to BackupPc', 'Got a timeout error trying to connect to BackupPc.')
+        print("ERROR: The request to BackupPc timed out.")
+        sys.exit(1)
+    except requests.exceptions.RequestException as e:
+        sendEmail('BackupPc Monitor - Error connecting to BackupPc', 'Got a error trying to connect to BackupPc')
+        print("ERROR: ", e)
+        sys.exit(1)
     soup = BeautifulSoup(page.text, "lxml")
     soup
     table = soup.find('table', id='host_summary_backups')
