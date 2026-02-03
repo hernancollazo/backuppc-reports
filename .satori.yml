@@ -12,7 +12,7 @@ bandit:
   test:
     assertStdoutContains: "No issues identified"
     run:
-      - bandit -r -s B404,B311,B603 ./
+      - bandit -r -s B105,B501,B404,B311,B603 ./
 
 #pylint:
 #  install:
