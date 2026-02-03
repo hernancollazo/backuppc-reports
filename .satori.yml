@@ -1,0 +1,50 @@
+settings:
+  name: "Test Python Application: Lint, Secure, Format"
+  description: "Runs static analysis and dependency vulnerability checks using Bandit, Pylint, Ruff, Flake8, and Safety."
+  image: python
+  author:
+    - https://github.com/satorici
+  example: satori run ./ --playbook playbook.yml --report --output
+
+bandit:
+  install:
+    - pip install bandit -q --disable-pip-version-check --root-user-action=ignore
+  test:
+    assertStdoutContains: "No issues identified"
+    run:
+      - bandit -r -s B404,B311,B603 ./
+
+#pylint:
+#  install:
+#    - DEBIAN_FRONTEND=noninteractive apt update >>/dev/null; apt install -qy pylint >>/dev/null
+#  test:
+#    assertReturnCode: 0
+#    run:
+#      - find . -type f -name "*.py" -exec pylint {} +
+
+ruff:
+  install:
+    - pip3 install ruff -q --disable-pip-version-check --root-user-action=ignore
+  test:
+    assertStdoutContains: "All checks passed!"
+    assertReturnCode: 0
+    run:
+      - ruff check --ignore F401,F403 ./
+
+flake8:
+  install:
+    - pip install flake8 -q --disable-pip-version-check --root-user-action=ignore
+  test:
+    assertReturnCode: 0
+    assertStdout: False
+    run:
+      - find . -type f -name "*.py" -exec flake8 {} +
+
+safety:
+  install:
+    - pip3 install safety -q --disable-pip-version-check --root-user-action=ignore
+  test:
+    assertReturnCode: 0
+    assertStdoutContains: "No known security vulnerabilities reported."
+    run:
+      - safety check -r requirements.txt
